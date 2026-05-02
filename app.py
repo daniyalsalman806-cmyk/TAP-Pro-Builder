@@ -11,7 +11,8 @@ if "GOOGLE_API_KEY" not in st.secrets:
 else:
     try:
         genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
-     model = genai.GenerativeModel('gemini-pro')
+        # Stable model name
+        model = genai.GenerativeModel('gemini-1.5-flash')
     except Exception as e:
         st.error(f"Config Error: {e}")
 
@@ -35,5 +36,4 @@ with col1:
 
 with col2:
     st.subheader("🌐 Live Preview")
-    # Ye line sabse stable hai preview dikhane ke liye
     components.html(st.session_state.code_output, height=600, scrolling=True)
