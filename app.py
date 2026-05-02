@@ -1,5 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
+import streamlit.components.v1 as components
 
 st.set_page_config(page_title="TAP Pro Builder", layout="wide")
 st.title("🛠️ TAP Pro: AI Website Architect")
@@ -10,7 +11,6 @@ if "GOOGLE_API_KEY" not in st.secrets:
 else:
     try:
         genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
-        # Fix: Direct model name use karein
         model = genai.GenerativeModel('gemini-1.5-flash')
     except Exception as e:
         st.error(f"Config Error: {e}")
@@ -22,7 +22,7 @@ if "code_output" not in st.session_state:
 
 with col1:
     st.subheader("⌨️ Design & Code")
-    user_prompt = st.chat_input("Prompt likhein (e.g. 'Simple cricket dashboard')")
+    user_prompt = st.chat_input("Prompt likhein (e.g. 'Build a cricket fan page')")
     
     if user_prompt:
         try:
@@ -35,5 +35,5 @@ with col1:
 
 with col2:
     st.subheader("🌐 Live Preview")
-    # New Streamlit way: st.iframe with srcdoc
-    st.iframe(srcdoc=st.session_state.code_output, height=600, scrolling=True)
+    # Ye line sabse stable hai preview dikhane ke liye
+    components.html(st.session_state.code_output, height=600, scrolling=True)
