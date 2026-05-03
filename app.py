@@ -9,11 +9,11 @@ st.title("🛠️ TAP Pro: AI Website Architect")
 if "GOOGLE_API_KEY" not in st.secrets:
     st.error("Secrets mein API Key missing hai!")
 else:
+    # Yahan se try block shuru hota hai
     try:
         genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
-        # Stable model name jo 404 error nahi dega
-        # Is line ko update karein:
-model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-1.5-flash')
+    # Ye except block hona zaroori hai syntax theek karne ke liye
     except Exception as e:
         st.error(f"Config Error: {e}")
 
@@ -24,7 +24,7 @@ if "code_output" not in st.session_state:
 
 with col1:
     st.subheader("⌨️ Design & Code")
-    user_prompt = st.chat_input("Prompt likhein (e.g. 'Build a cricket fan page')")
+    user_prompt = st.chat_input("Prompt likhein...")
     
     if user_prompt:
         try:
